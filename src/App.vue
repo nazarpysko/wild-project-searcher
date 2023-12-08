@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import ResultsList from './components/ResultsList.vue'
-// import ResultCard from './components/ResultCard.vue';
 
 interface Result {
   id: string
@@ -9,6 +8,7 @@ interface Result {
   timestamps: string[]
 }
 
+const searchUsed = ref(false)
 const searchterm = ref('')
 const loading = ref(false)
 const results = ref<Result[]>([])
@@ -26,22 +26,22 @@ function onInput(e: Event) {
 }
 
 function onSearch() {
+  searchUsed.value = true
   loading.value = true
-  results.value = generateResults()
-  scrollToResultsSection()
+
+  nextTick(() => scrollToResultsSection())
+
   setTimeout(() => {
+    results.value = generateResults()
     loading.value = false
-  }, 1000)
+  }, 2000)
 }
 
 function scrollToResultsSection() {
-      // Find the results section using the ref
-      const resultsSection = document.getElementById('results-section')
-
-      if (resultsSection) {
-        // Scroll to the results section smoothly
-        resultsSection.scrollIntoView({ behavior: 'smooth' });
-      }
+  const resultsSection = document.getElementById('results-section')
+  if (resultsSection) {
+    resultsSection.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 function onClearInput() {
@@ -66,7 +66,7 @@ function generateResults() {
 </script>
 
 <template>
-  <section class="landing-section">
+  <section id="landing-section">
     <div class="img-container">
       <img src="/wild-project-logo.png" class="logo" alt="Wild Project logo" />
       <img src="/Title.png" alt="Wild Project logo" />
@@ -91,12 +91,17 @@ function generateResults() {
     </div>
   </section>
 
-  <section id="results-section">
+  <section id="results-section" v-if="searchUsed">
     <ResultsList :results="results" :loading="loading"></ResultsList>
   </section>
 </template>
 
 <style scoped>
+#landing-section {
+  justify-content: center;
+  height: calc(100vh - 4rem);
+}
+
 .img-container {
   margin-bottom: 1.5em;
 }
@@ -124,7 +129,8 @@ function generateResults() {
   border-radius: 24px;
   gap: 0.5em;
 }
-.searchbar-container:focus-within, 
+
+.searchbar-container:focus-within,
 .searchbar-container:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -152,6 +158,7 @@ input {
 }
 
 #results-section {
-  margin-top: 2em;
+  min-height: 100vh;
+  padding-top: 2em;
 }
 </style>

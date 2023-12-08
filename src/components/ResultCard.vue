@@ -27,12 +27,13 @@ function getLink(videoURL: string, timestamp: string) {
                 <h3>The Wild Project #246 ft Vicente Garrido | Hay psicópatas entre nosotros, Así piensa un asesino</h3>
                 <a :href="result.videoURL" target="_BLANK">{{ result.videoURL }}</a>
             </hgroup>
-            <section class="timestamps" v-for="timestamp in result.timestamps" :key="result.id + timestamp">
+            <div class="timestamps" v-for="timestamp in result.timestamps" :key="result.id + timestamp">
                 <a :href="getLink(result.videoURL, timestamp)" target="_BLANK">{{ timestamp }}</a>
                 <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quod ipsa porro, consequuntur saepe
                     dignissimos corrupti blanditiis! Quod aliquam blanditiis quaerat corporis possimus neque dicta optio
-                    vero error, dolorum ex!</span>
-            </section>
+                    vero error, dolorum ex!
+                </span>
+            </div>
         </div>
     </div>
 </template>
