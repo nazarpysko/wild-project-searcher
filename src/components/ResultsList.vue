@@ -7,7 +7,7 @@ defineProps(['results', 'loading'])
 
 <template>
   <LoadingSpinner v-if="loading"/>
-  <section v-else>
+  <div v-else>
     <div v-if="results.length === 0">
       <img src="/dog-burning.gif" alt="Not found results">
       <h2>No se ha encontrado nada :(</h2>
@@ -15,7 +15,7 @@ defineProps(['results', 'loading'])
     <div v-else class="result-card" v-for="result in results">
         <ResultCard :result="result" />
     </div>
-  </section>
+  </div>
 </template>
 
 <style>
