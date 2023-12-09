@@ -16,6 +16,7 @@ import Header from './components/Header.vue';
 import Searchbar from './components/Searchbar.vue';
 
 const searchUsed = ref(false)
+const searchTime = ref('')
 
 async function onSearch() {
   searchUsed.value = true
@@ -24,10 +25,10 @@ async function onSearch() {
 
   // Need to nextTick because results-section is not rendered yet to perform the scroll
   nextTick(() => scrollToResultsSection())
-
+  const startTime = performance.now()
   const results: Results = (await fetchResults(store.searchterm)) as Results
+  searchTime.value = ((performance.now() - startTime) / 1000).toFixed(2) 
   store.setResults(results)
-
 }
 
 function scrollToResultsSection() {
@@ -55,7 +56,7 @@ function scrollToResultsSection() {
 
   <section id="results-section" v-if="searchUsed">
     <Header class="header" :onSearch="onSearch"></Header>
-    <ResultsList :results="store.results" :loading="store.isLoading" />
+    <ResultsList :results="store.results" :loading="store.isLoading" :searchTime="searchTime"/>
   </section>
 </template>
 

@@ -17,7 +17,7 @@ header {
     display: inline-flex;
     justify-content: center;
     gap: 2em;
-    padding: 2em 0;
+    padding: 2em 0 1em 0;
 }
 
 img {
