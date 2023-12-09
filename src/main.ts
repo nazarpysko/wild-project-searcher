@@ -7,11 +7,13 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 // Importing pages
 import LandingPage from './pages/LandingPage.vue'
 import ResultsPage from './pages/ResultsPage.vue'
+import NotFoundPage from './pages/NotFoundPage.vue'
 
 
 const routes = [
     { path: '/', component: LandingPage },
     { path: '/search', component: ResultsPage },
+    { path: '/:catchAll(.*)', component: NotFoundPage },
 ]
 
 const router = createRouter({

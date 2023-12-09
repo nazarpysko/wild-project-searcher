@@ -12,15 +12,15 @@ function getResultsCount() {
 <template>
   <div id="loading-container" v-if="store.isLoading">
     <LoadingSpinner />
-    <p>Cargando</p>
+    <p>Loading</p>
   </div>
   <div v-else>
     <div v-if="store.results.length === 0">
       <img src="/dog-burning.gif" alt="Not found results">
-      <h2>No se ha encontrado nada :(</h2>
+      <h2>Nothing has been found 😢</h2>
     </div>
     <div v-else>
-        <p id="result-performance">Se han obtenido {{ getResultsCount() }} resultados en {{ store.searchTime }} segundos</p>
+        <p id="result-performance">About {{ getResultsCount() }} results ({{ store.searchTime }} seconds)</p>
         <ResultCard class="result-card" v-for="result in store.results" :result="result" />
     </div>
   </div>
