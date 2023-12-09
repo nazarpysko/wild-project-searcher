@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { Results } from 'src/types';
+import { Result } from '../types';
+import { store } from '../store';
 import LoadingSpinner from './LoadingSpinner.vue';
 import ResultCard from './ResultCard.vue';
-defineProps(['results', 'loading', 'searchTime'])
 
-function getResultsCount(results: Results) {
-  return results.reduce((acc, res) => acc + res.timestamps.length, 0)
+function getResultsCount() {
+  return store.results.reduce((acc: number, res: Result) => acc + res.timestamps.length, 0)
 }
-
 </script>
 
 <template>
-  <div id="loading-container" v-if="loading">
+  <div id="loading-container" v-if="store.isLoading">
     <LoadingSpinner />
     <p>Cargando</p>
   </div>
   <div v-else>
-    <div v-if="results.length === 0">
+    <div v-if="store.results.length === 0">
       <img src="/dog-burning.gif" alt="Not found results">
       <h2>No se ha encontrado nada :(</h2>
     </div>
     <div v-else>
-        <p id="result-performance">Se han obtenido {{ getResultsCount(results) }} resultados en {{ searchTime }} segundos</p>
-        <ResultCard class="result-card" v-for="result in results" :result="result" />
+        <p id="result-performance">Se han obtenido {{ getResultsCount() }} resultados en {{ store.searchTime }} segundos</p>
+        <ResultCard class="result-card" v-for="result in store.results" :result="result" />
     </div>
   </div>
 </template>
