@@ -3,19 +3,17 @@
 </script>
 
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <style>
 .logo {
-    height: 6em;
-    will-change: filter;
-    transition: filter 300ms;
+  height: 6em;
+  will-change: filter;
+  transition: filter 300ms;
 }
 
 .logo:hover {
-    filter: drop-shadow(0 0 2em #FFB400);
+  filter: drop-shadow(0 0 2em #FFB400);
 }
 </style>

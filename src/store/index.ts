@@ -11,8 +11,8 @@ export const store = reactive({
 
     isLoading: false,
     setLoading(loading: boolean) { this.isLoading = loading },
-    results: <any>[],
-    setResults(newResults: any[]) {
+    results: <Results>[],
+    setResults(newResults: Results) {
         this.results = newResults
         this.setLoading(false)
     },
