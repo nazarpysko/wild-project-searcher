@@ -1,0 +1,6 @@
+# Required dependencies
+elasticsearch:          pip install elasticsearch
+pandas:                 pip install pandas
+sentence-transformers:  pip install sentence-transformers
+flask:                  pip install flask
+flask-restful:          pip install Flask-RESTful

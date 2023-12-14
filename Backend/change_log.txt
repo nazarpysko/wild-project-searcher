@@ -1,0 +1,68 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+
+## [Unreleased]
+
+## [0.4.0] - 2023-12-13
+
+### Added
+
+- Query endpoint returns the documents correctly
+
+### Updated
+
+- Readme dependencies contain now flask and Flask-RESTful
+
+
+## [0.3.0] - 2023-12-13
+
+### Added
+
+- Endpoint to retrieve and add documents to the elastic search indexes
+- Endpoint to execute a query
+- Endpoint to debug the application (yet to complete)
+- Http responses as constant values
+
+# Fixed
+
+- Function feed_records_to_index at podcast_utilities/elastic_utils.py has the parameters on the correct order
+
+
+## [0.2.1] - 2023-12-13
+
+### Added
+
+- Skeleton for put and delete methods
+
+### Changed
+
+- Made some functions private from Elastic class at podcast_utilities/elastic_utils.py
+- Test endpoint now returns test file properly formatted
+- podcast_utils.py at podcast_utilities renamed to file_utils.py
+
+### Fixed
+
+- Spelling errors at main
+
+### Deleted
+
+- Useless imports at main (sys, json)
+
+
+## [0.2.0] - 2023-12-13
+
+### Added
+
+- Connection to elastic search server from previous work done
+- Brought functions from jupyter notebook
+- Argument parse for easier execution and version checking
+- Transformer model
+
+
+## [0.1.0] - 2023-12-13
+
+### Added
+- This Change Log
+- First version of REST API Server with single endpoint
