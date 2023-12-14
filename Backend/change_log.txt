@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.0] - 2023-12-14
+
+### Added
+
+- Formatted the result of the query API to link correctly the Web petitions
+
 ## [0.4.0] - 2023-12-13
 
 ### Added
