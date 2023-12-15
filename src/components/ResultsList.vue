@@ -5,7 +5,7 @@ import LoadingSpinner from './LoadingSpinner.vue';
 import ResultCard from './ResultCard.vue';
 
 function getResultsCount() {
-  return store.results.reduce((acc: number, res: Result) => acc + res.timestamps.length, 0)
+  return store.results.reduce((acc: number, res: Result) => acc + res.transcriptions.length, 0)
 }
 </script>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps(['result'])
 
-function getLink(videoURL: string, timestamp: string) {
-    const time: string[] = timestamp.split(':')
+function getLink(videoURL: string, timestamp: number) {
+    const time: string[] = getReadableTimestamp(timestamp).split(':')
     let ytTimestamp: string
     if (time.length === 3) {
         ytTimestamp = `${time[0]}h${time[1]}m${time[2]}s`
@@ -11,6 +11,13 @@ function getLink(videoURL: string, timestamp: string) {
     }
 
     return `${videoURL}#t=${ytTimestamp}`
+}
+
+function getReadableTimestamp(timestamp: number): string {
+    const hours = Math.floor(timestamp / 360)
+    const minutes = Math.floor((timestamp - hours * 360) / 60)
+    const seconds = timestamp - (hours * 360 + minutes * 60)
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` 
 }
 </script>
 
@@ -27,12 +34,9 @@ function getLink(videoURL: string, timestamp: string) {
                 <h3>The Wild Project #246 ft Vicente Garrido | Hay psicópatas entre nosotros, Así piensa un asesino</h3>
                 <a :href="result.videoURL" target="_BLANK">{{ result.videoURL }}</a>
             </hgroup>
-            <div class="timestamps" v-for="timestamp in result.timestamps" :key="result.id + timestamp">
-                <a :href="getLink(result.videoURL, timestamp)" target="_BLANK">{{ timestamp }}</a>
-                <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quod ipsa porro, consequuntur saepe
-                    dignissimos corrupti blanditiis! Quod aliquam blanditiis quaerat corporis possimus neque dicta optio
-                    vero error, dolorum ex!
-                </span>
+            <div class="timestamps" v-for="transcription in result.transcriptions" :key="result.id + transcription.timestamp">
+                <a :href="getLink(result.videoURL, transcription.timestamp)" target="_BLANK">{{ getReadableTimestamp(transcription.timestamp) }}</a>
+                <span>{{ transcription.text }}</span>
             </div>
         </div>
     </div>

@@ -1,7 +1,12 @@
+export interface Transcription {
+    text: string
+    timestamp: number
+}
+
 export interface Result {
     id: string
     videoURL: string
-    timestamps: string[]
+    transcriptions: Transcription[]
 }
 
 export type Results = Result[]
