@@ -13,12 +13,14 @@ function generateResults() {
     const length: number = Math.floor(Math.random() * 6)
     const res: Results = []
     for (let i = 0; i < length; i++) {
-        const nTimestamps = Math.floor(Math.random() * 4) + 1
-
+        const timestamps = [45, 158, 1005]
         res.push({
             id: videos[i].split('=')[1],
             videoURL: videos[i],
-            timestamps: ['00:45', '10:15', '25:02'].slice(0, nTimestamps)
+            transcriptions: [{
+                text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quod ipsa porro, consequuntur saepedignissimos corrupti blanditiis! Quod aliquam blanditiis quaerat corporis possimus neque dicta optio vero error, dolorum ex!",
+                timestamp: timestamps[0]
+            }]
         })
     }
 
