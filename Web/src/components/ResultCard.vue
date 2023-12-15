@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps(['result'])
-
-function getLink(videoURL: string, timestamp: number) {
+const youtubeURL = "https://www.youtube.com/watch?v="
+function getLink(video_id: string, timestamp: number) {
     const time: string[] = getReadableTimestamp(timestamp).split(':')
     let ytTimestamp: string
     if (time.length === 3) {
@@ -9,14 +9,14 @@ function getLink(videoURL: string, timestamp: number) {
     } else {
         ytTimestamp = `${time[0]}m${time[1]}s`
     }
-
-    return `${videoURL}#t=${ytTimestamp}`
+    
+    return `${youtubeURL}${video_id}#t=${ytTimestamp}`
 }
 
 function getReadableTimestamp(timestamp: number): string {
     const hours = Math.floor(timestamp / 360)
     const minutes = Math.floor((timestamp - hours * 360) / 60)
-    const seconds = timestamp - (hours * 360 + minutes * 60)
+    const seconds = Math.floor(timestamp - (hours * 360 + minutes * 60))
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` 
 }
 </script>
@@ -24,19 +24,19 @@ function getReadableTimestamp(timestamp: number): string {
 <template>
     <div class="container">
         <div class="img-container">
-            <a :href="result.videoURL" target="_BLANK">
-                <img :src="`https://img.youtube.com/vi/${result.id}/sddefault.jpg`" alt="Youtube Thumbnail" />
+            <a :href="youtubeURL + result.video_id" target="_BLANK">
+                <img :src="`https://img.youtube.com/vi/${result.video_id}/sddefault.jpg`" alt="Youtube Thumbnail" />
             </a>
         </div>
 
         <div class="card">
             <hgroup>
                 <h3>The Wild Project #246 ft Vicente Garrido | Hay psicópatas entre nosotros, Así piensa un asesino</h3>
-                <a :href="result.videoURL" target="_BLANK">{{ result.videoURL }}</a>
+                <a :href="youtubeURL + result.video_id" target="_BLANK">{{ youtubeURL + result.video_id }}</a>
             </hgroup>
-            <div class="timestamps" v-for="transcription in result.transcriptions" :key="result.id + transcription.timestamp">
-                <a :href="getLink(result.videoURL, transcription.timestamp)" target="_BLANK">{{ getReadableTimestamp(transcription.timestamp) }}</a>
-                <span>{{ transcription.text }}</span>
+            <div class="timestamps" v-for="transcription in result.transcriptions" :key="result.video_id + transcription.timestamp">
+                <a :href="getLink(result.video_id, transcription.timestamp)" target="_BLANK">{{ getReadableTimestamp(transcription.timestamp) }}</a>
+                <span>{{ transcription.transcription }}</span>
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@ hgroup {
 }
 
 .timestamps {
-    display: inline-flex;
+    display: flex;
     gap: 1em;
 }
 

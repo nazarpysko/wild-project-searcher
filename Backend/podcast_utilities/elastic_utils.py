@@ -14,12 +14,12 @@ def _format_results(result_hits):
             "timestamp": info["start"]
         }
         if id in retVal:
-            retVal[id]["trancriptions"].append(transcription)
+            retVal[id]["transcriptions"].append(transcription)
         else:
             retVal[id] = {
                 "video_id": info["video_id"],
                 "title": info["title"],
-                "trancriptions": [transcription],
+                "transcriptions": [transcription],
             }
 
     return list(retVal.values())

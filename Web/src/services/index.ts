@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { Results } from '../types'
-
 
 function generateResults() {
     const videos: string[] = [
@@ -15,10 +15,10 @@ function generateResults() {
     for (let i = 0; i < length; i++) {
         const timestamps = [45, 158, 1005]
         res.push({
-            id: videos[i].split('=')[1],
-            videoURL: videos[i],
+            video_id: videos[i].split('=')[1],
+            title: videos[i],
             transcriptions: [{
-                text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quod ipsa porro, consequuntur saepedignissimos corrupti blanditiis! Quod aliquam blanditiis quaerat corporis possimus neque dicta optio vero error, dolorum ex!",
+                transcription: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quod ipsa porro, consequuntur saepedignissimos corrupti blanditiis! Quod aliquam blanditiis quaerat corporis possimus neque dicta optio vero error, dolorum ex!",
                 timestamp: timestamps[0]
             }]
         })
@@ -27,14 +27,8 @@ function generateResults() {
     return res
 }
 
-export function fetchResults(searchterm: string) {
-    // TODO: Make real fetch
-
-    console.log(`Searching ${searchterm} in Elasticsearch...`)
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const data = generateResults()
-            resolve(data)
-        }, 1000)
-    })
+export async function fetchResults(searchterm: string) {
+    try {
+        return await axios.put('http://localhost:5000/api/search', `query=${searchterm}`)
+    } catch (err) { console.error(err) }
 }

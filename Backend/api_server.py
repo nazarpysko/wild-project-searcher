@@ -5,6 +5,7 @@ import constants
 from podcast_utilities.elastic_utils import Elastic
 from podcast_utilities.file_utils import transform_json
 from podcast_utilities.transformer_model import Model
+from flask_cors import CORS
 
 parser_podcast = reqparse.RequestParser()
 parser_podcast.add_argument('video_id', required=True, location='form')
@@ -77,6 +78,7 @@ if __name__ == '__main__':
 
             # Creates a Flask Application
             app = Flask("PodcastAPI")
+            CORS(app)
             api = Api(app)
 
             # Defines the endpoints

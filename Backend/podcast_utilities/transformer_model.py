@@ -7,7 +7,7 @@ from utilities import SingletonMeta
 
 class Model(metaclass=SingletonMeta):
     def __init__(self):
-        self.model = SentenceTransformer(MODEL_NAME)
+        self.model = SentenceTransformer(MODEL_NAME, device='cpu')
 
     # Feeds a pandas dataframe into the transformer
     def feed_dataframe(self, df: pd.DataFrame):

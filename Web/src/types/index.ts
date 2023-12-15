@@ -1,11 +1,11 @@
 export interface Transcription {
-    text: string
+    transcription: string
     timestamp: number
 }
 
 export interface Result {
-    id: string
-    videoURL: string
+    video_id: string
+    title: string
     transcriptions: Transcription[]
 }
 
