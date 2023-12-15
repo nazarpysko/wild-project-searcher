@@ -31,7 +31,7 @@ function getReadableTimestamp(timestamp: number): string {
 
         <div class="card">
             <hgroup>
-                <h3>The Wild Project #246 ft Vicente Garrido | Hay psicópatas entre nosotros, Así piensa un asesino</h3>
+                <h3>{{ result.title }}</h3>
                 <a :href="youtubeURL + result.video_id" target="_BLANK">{{ youtubeURL + result.video_id }}</a>
             </hgroup>
             <div class="timestamps" v-for="transcription in result.transcriptions" :key="result.video_id + transcription.timestamp">
