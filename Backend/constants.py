@@ -29,7 +29,7 @@ INDEX_MAPPINGS = {
             },
             "text_vector": {
                 "type": "dense_vector",
-                "dims": 2000,
+                "dims": 768,
                 "index": True,
                 "similarity": "l2_norm"
             },
@@ -48,7 +48,7 @@ INDEX_MAPPINGS = {
             },
             "text_vector": {
                 "type": "dense_vector",
-                "dims": 2000,
+                "dims": 768,
                 "index": True,
                 "similarity": "l2_norm"
             },
@@ -56,11 +56,14 @@ INDEX_MAPPINGS = {
     }
 }
 
-#HTTP Responses
+# HTTP Responses
 HTTP_OK = 200
 HTTP_CREATED = 201
-HTTP_NOT_FOUND = 404
-HTTP_CONFLICT = 409
+HTTP_ERROR_NOT_FOUND = 404
+HTTP_ERROR_CONFLICT = 409
+HTTP_ERROR_SERVICE_UNAVAILABLE = 503
+HTTP_ERROR_NOT_IMPLEMENTED = 501
+HTTP_MESSAGE_ES_NOT_CONNECTED = "Cannot make contact to the Elastic Search Server"
 
 # Other
 PROGRAM_NAME = "Podcast Transcription API Server"
@@ -68,3 +71,4 @@ PROGRAM_DESCRIPTION = ""
 PROGRAM_EPILOG = ""
 MODEL_NAME = "all-mpnet-base-v2"
 VERSION = "1.0.0"
+INITIAL_DOCUMENTS_PATH = "documents/initial/modeled"

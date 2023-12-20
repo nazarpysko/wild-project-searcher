@@ -13,7 +13,7 @@ import numpy as np
 
 class Model(metaclass=SingletonMeta):
     def __init__(self):
-        self.model = SentenceTransformer(MODEL_NAME, device='cpu')
+        self.model = SentenceTransformer(MODEL_NAME)
 
     # Feeds a pandas dataframe into the transformer
     def feed_dataframe(self, df: pd.DataFrame):
