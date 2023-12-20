@@ -21,8 +21,7 @@ export const store = reactive({
     async search() {
         this.setLoading(true)
         const startTime = performance.now()
-        const response = await fetchResults(store.searchterm)
-        const results: Results = response!.data
+        const results: Results = await fetchResults(store.searchterm)
         store.searchTime = ((performance.now() - startTime) / 1000).toFixed(2)
         this.setResults(results)
     }
