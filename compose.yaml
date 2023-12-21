@@ -1,0 +1,37 @@
+services:
+  elastic-search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: es-wild-project
+    ports:
+      - 9200:9200
+    environment:
+      - ELASTIC_PASSWORD_FILE=/run/secrets/es-password
+    volumes:
+      - es-config:/usr/share/elasticsearch/config
+    secrets:
+      - es-password
+
+  frontend:
+    build: ./Web
+    image: gabriela-and-co/wps-frontend
+    container_name: frontend-wild-project
+    ports:
+      - 8080:80
+
+  backend:
+    build: ./Backend
+    image: gabriela-and-co/wps-backend
+    container_name: backend-wild-project
+    ports:
+      - 5000:5000
+    volumes:
+      - es-config:/srv/wps-backend/es-config
+    secrets:
+      - es-password
+
+volumes:
+    es-config:
+
+secrets:
+  es-password:
+    file: ./es-password
