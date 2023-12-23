@@ -36,12 +36,19 @@ store.setSearchterm('')
     height: 100vh;
 }
 
-.logo {
-    padding: 1.5em;
+.img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1.5em;
+    align-content: center;
 }
 
-.img-container {
-    margin-bottom: 1.5em;
+img {
+    overflow: auto;
+    flex-grow: 0;
+    object-fit: scale-down;
 }
 
 .landing-searchbar {
@@ -53,5 +60,11 @@ store.setSearchterm('')
     gap: 10px;
     justify-content: center;
     margin: 1em;
+}
+
+@media only screen and (max-width: 767px) {
+    .landing-searchbar {
+        width: 100%;
+    }
 }
 </style>

@@ -13,15 +13,13 @@ import Footer from '../components/Footer.vue';
 </template>
 
 <style scoped>
+.header {
+  top: 0;
+}
+
 #results-section {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 95%;
-  margin: 0 2em;
-}
-
-.results-list {
-  flex-grow: 1; /* This will make ResultsList take up the available space */
 }
 </style>

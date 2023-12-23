@@ -21,11 +21,6 @@ a:hover {
   color: #747bff;
 }
 
-html {
-  scroll-snap-type: y mandatory;
-  overscroll-behavior-y: contain;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -61,14 +56,19 @@ button:focus-visible {
 section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  scroll-snap-align: start; 
+  align-items: center; 
 }
 
 #app {
   width: 90%;
   margin: 0 auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
   text-align: center;
+  overflow: none;
+}
+
+@media only screen and (max-width: 767px) {
+  button {
+      font-size: 14px;
+      padding: 10px;
+  }
 }

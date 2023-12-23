@@ -31,6 +31,12 @@ header {
     z-index: 10;
 }
 
+@media only screen and (max-width: 767px) {
+    header {
+        gap: 1em;
+    }
+}
+
 img {
     width: 50px;
     height: 50px;
