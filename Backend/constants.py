@@ -6,8 +6,9 @@ PORT = 5000
 ELASTIC_IP = "localhost"
 ELASTIC_PORT = 9200
 ELASTIC_USERNAME = "elastic"
-CERTIFICATE_PATH = "documents/test/cert.crt"
-ELASTIC_HOST = "https://" + ELASTIC_IP + ":" + str(ELASTIC_PORT) # Don't Change this
+CERTIFICATE_PATH = "es-config/certs/cert.crt"
+PASSWORD_PATH = "run/secrets/es-password"
+ELASTIC_HOST = "https://" + ELASTIC_IP + ":" + str(ELASTIC_PORT)  # Don't Change this
 ELASTIC_INDEXES = ["full_transcription", "videos"]
 INDEX_MAPPINGS = {
     "full_transcription": {
@@ -63,7 +64,6 @@ HTTP_ERROR_NOT_FOUND = 404
 HTTP_ERROR_CONFLICT = 409
 HTTP_ERROR_SERVICE_UNAVAILABLE = 503
 HTTP_ERROR_NOT_IMPLEMENTED = 501
-HTTP_MESSAGE_ES_NOT_CONNECTED = "Cannot make contact to the Elastic Search Server"
 
 # Other
 PROGRAM_NAME = "Podcast Transcription API Server"
@@ -72,3 +72,5 @@ PROGRAM_EPILOG = ""
 MODEL_NAME = "all-mpnet-base-v2"
 VERSION = "1.0.0"
 INITIAL_DOCUMENTS_PATH = "documents/initial/modeled"
+MESSAGE_ES_NOT_CONNECTED = "Cannot make contact to the Elastic Search Server"
+MAX_TRIES = 30
