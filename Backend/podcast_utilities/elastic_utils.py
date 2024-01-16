@@ -94,5 +94,8 @@ class Elastic(metaclass=SingletonMeta):
 
         return retVal
 
-    def craete_snapshot(self):
-        self.es.snapshot.create()
+    def create_snapshot_repository(self, name):
+        self.es.snapshot.create_repository(name=name, settings={"location": "/mnt/backups/test"}, type="fs")
+
+    def create_snapshot(self, rep_name, snap_name):
+        self.es.snapshot.create(repository=rep_name, snapshot=snap_name)

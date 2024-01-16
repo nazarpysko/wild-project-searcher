@@ -73,4 +73,5 @@ MODEL_NAME = "all-mpnet-base-v2"
 VERSION = "1.0.0"
 INITIAL_DOCUMENTS_PATH = "documents/initial/modeled"
 MESSAGE_ES_NOT_CONNECTED = "Cannot make contact to the Elastic Search Server"
+MESSAGE_ES_CONNECTED = "Connection to the Elastic Search Server successfully established"
 MAX_TRIES = 30

@@ -13,7 +13,7 @@ def check_es_connection(es: Elastic):
         return False, "No Elastic object created"
 
     ok, why = es.check_connection()
-    return not ok, why
+    return ok, str(why)
 
 
 parser_podcast = reqparse.RequestParser()
@@ -90,7 +90,9 @@ if __name__ == '__main__':
     ok, why = es.check_connection()
 
     if not ok:
-        print(constants.MESSAGE_ES_NOT_CONNECTED + " " + str(why))
+        print(constants.MESSAGE_ES_NOT_CONNECTED + "\n" + str(why))
+    else:
+        print(constants.MESSAGE_ES_CONNECTED)
 
     # Starts the API server
     app.run()
