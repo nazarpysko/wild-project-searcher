@@ -3,7 +3,7 @@
   <br>
   <a href="http://twps.cub3.xyz"><img src="/img/wild-project-logo.png" alt="The Wild Project Searcher" width="200"></a>
   <br>
-  Markdownify
+  The Wild Project Searcher
   <br>
 </h1>
 
