@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="http://twps.cub3.xyz"><img src="https://twps.cub3.xyz/wild-project-logo.png" alt="The Wild Project Searcher" width="200"></a>
+  <a href="http://twps.cub3.xyz"><img src="/img/wild-project-logo.png" alt="The Wild Project Searcher" width="200"></a>
   <br>
   Markdownify
   <br>
