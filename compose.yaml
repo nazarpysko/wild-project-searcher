@@ -24,8 +24,8 @@ services:
     container_name: frontend-wild-project
     ports:
       - 8080:80
-    networks:
-      - twps
+#    networks:
+#     - twps
 #    network_mode: "host"
 
   backend:
@@ -34,15 +34,15 @@ services:
     container_name: backend-wild-project
     ports:
       - 5000:5000
-#   environment:
-#      - ELASTIC_IP=elastic-search
-#      - ELASTIC_PORT=9200
+    environment:
+      - ELASTIC_IP=es-wild-project
+      - ELASTIC_PORT=9200
 #    volumes:
 #      - es-config:/srv/wps-backend/es-config
 #    secrets:
 #      - es-password
-#    networks:
-#      - twps
+    networks:
+      - twps
 #    network_mode: "host"
 
 networks:

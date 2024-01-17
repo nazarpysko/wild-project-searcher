@@ -1,10 +1,12 @@
+import os
+
 # Server Configuraion
 HOST = "localhost"
 PORT = 5000
 
 # Elastic Configuration
-ELASTIC_IP = "localhost"
-ELASTIC_PORT = 9200
+ELASTIC_IP = os.environ['ELASTIC_IP']
+ELASTIC_PORT = os.environ['ELASTIC_PORT']
 ELASTIC_USERNAME = "elastic"
 CERTIFICATE_PATH = "es-config/certs/http_ca.crt"
 PASSWORD_PATH = "/run/secrets/es-password"

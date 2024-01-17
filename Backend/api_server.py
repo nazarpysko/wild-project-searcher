@@ -86,4 +86,4 @@ if __name__ == '__main__':
         print(constants.MESSAGE_ES_CONNECTED)
 
     # Starts the API server
-    app.run()
+    app.run(host='0.0.0.0')
