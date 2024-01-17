@@ -14,9 +14,9 @@ function getLink(video_id: string, timestamp: number) {
 }
 
 function getReadableTimestamp(timestamp: number): string {
-    const hours = Math.floor(timestamp / 360)
-    const minutes = Math.floor((timestamp - hours * 360) / 60)
-    const seconds = Math.floor(timestamp - (hours * 360 + minutes * 60))
+    const hours = Math.floor(timestamp / 3600)
+    const minutes = Math.floor((timestamp - hours * 3600) / 60)
+    const seconds = Math.floor(timestamp - (hours * 3600 + minutes * 60))
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 }
 </script>
