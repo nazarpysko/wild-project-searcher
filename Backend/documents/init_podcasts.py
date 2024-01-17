@@ -46,6 +46,7 @@ if __name__ == "__main__":
         print(MESSAGE_ES_NOT_CONNECTED + " " + str(why))
 
     else:
+        es.create_indexes()
         docs = es.get_num_documents()
         values = list(docs.values())
         print("There are", values[0], "in one index and", values[1], "in the other")

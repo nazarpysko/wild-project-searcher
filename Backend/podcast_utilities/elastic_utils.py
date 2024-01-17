@@ -38,8 +38,8 @@ class Elastic(metaclass=SingletonMeta):
         self.model = Model()
 
         if clean:
-            self._remove_indexes()
-            self._create_indexes()
+            self.remove_indexes()
+            self.create_indexes()
 
     # Returns true if a connection has been established
     def check_connection(self):
@@ -51,19 +51,24 @@ class Elastic(metaclass=SingletonMeta):
 
         return ping_response, extra_info
 
-    def _remove_indexes(self):
+    def remove_indexes(self):
         for index_name in ELASTIC_INDEXES:
-            try:
-                self.es.indices.delete(index=index_name)
-            except:
-                pass
+            if self.check_index(index_name):
+                try:
+                    self.es.indices.delete(index=index_name)
+                except:
+                    pass
 
-    def _create_indexes(self):
+    def create_indexes(self):
         for index_name in ELASTIC_INDEXES:
-            try:
-                self.es.indices.create(index=index_name, mappings=INDEX_MAPPINGS[index_name])
-            except:
-                pass
+            if not self.check_index(index_name):
+                try:
+                    self.es.indices.create(index=index_name, mappings=INDEX_MAPPINGS[index_name])
+                except:
+                    pass
+
+    def check_index(self, name):
+        return self.es.indices.exists(index=name)
 
     # Adds a record style list into an index
     def feed_records_to_index(self, record_list, index, index_id="id"):
