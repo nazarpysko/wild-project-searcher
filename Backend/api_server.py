@@ -13,7 +13,7 @@ def check_es_connection(es: Elastic):
         return False, "No Elastic object created"
 
     ok, why = es.check_connection()
-    return not ok, why
+    return ok, str(why)
 
 
 parser_podcast = reqparse.RequestParser()
@@ -77,20 +77,13 @@ api.add_resource(Podcast, '/api/podcast')
 api.add_resource(Searcher, '/api/search')
 
 if __name__ == '__main__':
-    if not wait_for_file(constants.PASSWORD_PATH, "Password", constants.MAX_TRIES, 10):
-        exit(1)
-
-    if not wait_for_file(constants.CERTIFICATE_PATH, "Certificate", constants.MAX_TRIES, 10):
-        exit(1)
-
-    with open(constants.PASSWORD_PATH, "r") as file:
-        password = file.read()
-
-    es = Elastic(password, constants.CERTIFICATE_PATH)
+    es = Elastic()
     ok, why = es.check_connection()
 
     if not ok:
-        print(constants.MESSAGE_ES_NOT_CONNECTED + " " + str(why))
+        print(constants.MESSAGE_ES_NOT_CONNECTED + "\n" + str(why))
+    else:
+        print(constants.MESSAGE_ES_CONNECTED)
 
     # Starts the API server
-    app.run()
+    app.run(host='0.0.0.0')

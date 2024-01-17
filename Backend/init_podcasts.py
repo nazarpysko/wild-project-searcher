@@ -30,22 +30,14 @@ def init_documents():
 
 
 if __name__ == "__main__":
-    if not wait_for_file(PASSWORD_PATH, "Password", MAX_TRIES, 10):
-        exit(1)
-
-    if not wait_for_file(CERTIFICATE_PATH, "Certificate", MAX_TRIES, 10):
-        exit(1)
-
-    with open(PASSWORD_PATH, mode="r") as file:
-        password = file.read()
-
-    es = Elastic(password, CERTIFICATE_PATH)
+    es = Elastic()
     ok, why = es.check_connection()
 
     if not ok:
         print(MESSAGE_ES_NOT_CONNECTED + " " + str(why))
 
     else:
+        es.create_indexes()
         docs = es.get_num_documents()
         values = list(docs.values())
         print("There are", values[0], "in one index and", values[1], "in the other")

@@ -9,4 +9,4 @@ COPY . .
 
 RUN mkdir es-config
 
-CMD [ "python3", "-m" , "flask", "run", "api_server", "--host=0.0.0.0"]
+CMD [ "python3", "api_server.py"]

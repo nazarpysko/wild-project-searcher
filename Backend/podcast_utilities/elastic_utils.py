@@ -28,18 +28,14 @@ def _format_results(result_hits):
 
 
 class Elastic(metaclass=SingletonMeta):
-    def __init__(self, password, certificate_path, clean=False):
-        self.es = Elasticsearch(
-            ELASTIC_HOST,
-            basic_auth=(ELASTIC_USERNAME, password),
-            ca_certs=certificate_path
-        )
+    def __init__(self, clean=False):
+        self.es = Elasticsearch(ELASTIC_HOST)
 
         self.model = Model()
 
         if clean:
-            self._remove_indexes()
-            self._create_indexes()
+            self.remove_indexes()
+            self.create_indexes()
 
     # Returns true if a connection has been established
     def check_connection(self):
@@ -51,19 +47,24 @@ class Elastic(metaclass=SingletonMeta):
 
         return ping_response, extra_info
 
-    def _remove_indexes(self):
+    def remove_indexes(self):
         for index_name in ELASTIC_INDEXES:
-            try:
-                self.es.indices.delete(index=index_name)
-            except:
-                pass
+            if self.check_index(index_name):
+                try:
+                    self.es.indices.delete(index=index_name)
+                except:
+                    pass
 
-    def _create_indexes(self):
+    def create_indexes(self):
         for index_name in ELASTIC_INDEXES:
-            try:
-                self.es.indices.create(index=index_name, mappings=INDEX_MAPPINGS[index_name])
-            except:
-                pass
+            if not self.check_index(index_name):
+                try:
+                    self.es.indices.create(index=index_name, mappings=INDEX_MAPPINGS[index_name])
+                except:
+                    pass
+
+    def check_index(self, name):
+        return self.es.indices.exists(index=name)
 
     # Adds a record style list into an index
     def feed_records_to_index(self, record_list, index, index_id="id"):
@@ -94,5 +95,8 @@ class Elastic(metaclass=SingletonMeta):
 
         return retVal
 
-    def craete_snapshot(self):
-        self.es.snapshot.create()
+    def create_snapshot_repository(self, name):
+        self.es.snapshot.create_repository(name=name, settings={"location": "/mnt/backups/test"}, type="fs")
+
+    def create_snapshot(self, rep_name, snap_name):
+        self.es.snapshot.create(repository=rep_name, snapshot=snap_name)
