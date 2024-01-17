@@ -10,8 +10,8 @@ services:
       - node.name=elasticsearch1
       - cluster.initial_master_nodes=elasticsearch1
       - xpack.security.enabled=false    # Avoid using https certs
-#    volumes:
-#      - es-config:/usr/share/elasticsearch/config
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
 #    secrets:
 #      - es-password
     networks:
@@ -52,8 +52,8 @@ networks:
   twps:
     name: twps
 
-#volumes:
-#  es-config:
+volumes:
+  es-data:
 
 #secrets:
 #  es-password:
