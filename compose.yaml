@@ -2,31 +2,31 @@ services:
   elastic-search:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
     container_name: es-wild-project
-#    ports:
-#      - 9200:9200
+    ports:
+      - 9200:9200
     environment:
-      - ELASTIC_PASSWORD_FILE=/run/secrets/es-password
+#      - ELASTIC_PASSWORD_FILE=/run/secrets/es-password
       - cluster.name=docker-cluster
       - node.name=elasticsearch1
       - cluster.initial_master_nodes=elasticsearch1
-#      - xpack.security.enabled=false    # Avoid using https certs
-    volumes:
-      - es-config:/usr/share/elasticsearch/config
-    secrets:
-      - es-password
-#    networks:
-#      - twps
-    network_mode: "host"
+      - xpack.security.enabled=false    # Avoid using https certs
+#    volumes:
+#      - es-config:/usr/share/elasticsearch/config
+#    secrets:
+#      - es-password
+    networks:
+      - twps
+#    network_mode: "host"
 
   frontend:
     build: ./Web
     image: gabriela-and-co/wps-frontend
     container_name: frontend-wild-project
-#    ports:
-#      - 8080:80
-#    networks:
-#      - twps
-    network_mode: "host"
+    ports:
+      - 8080:80
+    networks:
+      - twps
+#    network_mode: "host"
 
   backend:
     build: ./Backend
@@ -34,24 +34,24 @@ services:
     container_name: backend-wild-project
     ports:
       - 5000:5000
-   environment:
-      - ELASTIC_IP=elastic-search
-      - ELASTIC_PORT=9200
-    volumes:
-      - es-config:/srv/wps-backend/es-config
-    secrets:
-      - es-password
+#   environment:
+#      - ELASTIC_IP=elastic-search
+#      - ELASTIC_PORT=9200
+#    volumes:
+#      - es-config:/srv/wps-backend/es-config
+#    secrets:
+#      - es-password
 #    networks:
 #      - twps
-    network_mode: "host"
+#    network_mode: "host"
 
 networks:
   twps:
     name: twps
 
-volumes:
-  es-config:
+#volumes:
+#  es-config:
 
-secrets:
-  es-password:
-    file: ./es-password
+#secrets:
+#  es-password:
+#    file: ./es-password

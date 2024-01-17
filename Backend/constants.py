@@ -1,5 +1,3 @@
-import os
-
 # Server Configuraion
 HOST = "localhost"
 PORT = 5000
@@ -10,7 +8,7 @@ ELASTIC_PORT = 9200
 ELASTIC_USERNAME = "elastic"
 CERTIFICATE_PATH = "es-config/certs/http_ca.crt"
 PASSWORD_PATH = "/run/secrets/es-password"
-ELASTIC_HOST = "https://" + ELASTIC_IP + ":" + str(ELASTIC_PORT)  # Don't Change this
+ELASTIC_HOST = "http://" + ELASTIC_IP + ":" + str(ELASTIC_PORT)  # Don't Change this
 ELASTIC_INDEXES = ["full_transcription", "videos"]
 INDEX_MAPPINGS = {
     "full_transcription": {

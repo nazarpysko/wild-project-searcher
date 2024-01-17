@@ -77,16 +77,7 @@ api.add_resource(Podcast, '/api/podcast')
 api.add_resource(Searcher, '/api/search')
 
 if __name__ == '__main__':
-    if not wait_for_file(constants.PASSWORD_PATH, "Password", constants.MAX_TRIES, 10):
-        exit(1)
-
-    if not wait_for_file(constants.CERTIFICATE_PATH, "Certificate", constants.MAX_TRIES, 10):
-        exit(1)
-
-    with open(constants.PASSWORD_PATH, "r") as file:
-        password = file.read()
-
-    es = Elastic(password, constants.CERTIFICATE_PATH)
+    es = Elastic()
     ok, why = es.check_connection()
 
     if not ok:

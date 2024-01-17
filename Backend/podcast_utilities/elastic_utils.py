@@ -28,12 +28,8 @@ def _format_results(result_hits):
 
 
 class Elastic(metaclass=SingletonMeta):
-    def __init__(self, password, certificate_path, clean=False):
-        self.es = Elasticsearch(
-            ELASTIC_HOST,
-            basic_auth=(ELASTIC_USERNAME, password),
-            ca_certs=certificate_path
-        )
+    def __init__(self, clean=False):
+        self.es = Elasticsearch(ELASTIC_HOST)
 
         self.model = Model()
 
