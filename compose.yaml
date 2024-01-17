@@ -17,6 +17,7 @@ services:
     networks:
       - twps
 #    network_mode: "host"
+    restart: unless-stopped
 
   frontend:
     build: ./Web
@@ -27,6 +28,7 @@ services:
 #    networks:
 #     - twps
 #    network_mode: "host"
+    restart: unless-stopped
 
   backend:
     build: ./Backend
@@ -44,6 +46,7 @@ services:
     networks:
       - twps
 #    network_mode: "host"
+    restart: unless-stopped
 
 networks:
   twps:
