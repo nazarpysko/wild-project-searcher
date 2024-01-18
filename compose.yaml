@@ -21,7 +21,7 @@ services:
 
   frontend:
     build: ./Web
-    image: leosfsm/wps-frontend
+    image: gabriela-and-co/wps-frontend
     container_name: frontend-wild-project
     ports:
       - 8080:80
@@ -32,7 +32,7 @@ services:
 
   backend:
     build: ./Backend
-    image: leosfsm/wps-backend
+    image: gabriela-and-co/wps-backend
     container_name: backend-wild-project
     ports:
       - 5000:5000
