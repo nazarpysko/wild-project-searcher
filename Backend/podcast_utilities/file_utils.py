@@ -80,22 +80,29 @@ def group_transcriptions(transcription, size=2, text_len=None):
     new_transcription = []
     tmp = init_tmp_transcription()
     current_size = 0
+    start = -1
 
     for i, transcription in enumerate(transcription):
         tmp['text'] += transcription['text']
-        tmp['duration'] += transcription['duration']
         current_size += 1
+
+        if start == -1:
+            start = transcription['start']
 
         if text_len is not None:
             if len(tmp['text']) > text_len:
-                tmp['start'] = transcription['start']
+                tmp['start'] = start
+                tmp['duration'] = transcription['start'] - start
+                start = -1
                 new_transcription.append(tmp)
                 tmp = init_tmp_transcription()
             else:
                 tmp['text'] += " "
 
         elif current_size >= size:
-            tmp['start'] = transcription['start']
+            tmp['start'] = start
+            tmp['duration'] = transcription['start'] - start
+            start = -1
             new_transcription.append(tmp)
             tmp = init_tmp_transcription()
             size = 0
@@ -139,8 +146,8 @@ def transcribe_playlist(playlist_id, first_video=0, num_videos=10, group_size=2,
 
 if __name__ == "__main__":
     quantity = 5
-    start = 100
-    total_videos = 250
+    start = 105
+    total_videos = 260
     r = (total_videos - start) // quantity
 
     for i in tqdm.tqdm(range(r)):
