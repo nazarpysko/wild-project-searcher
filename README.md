@@ -7,13 +7,13 @@
   <br>
 </h1>
 
-<h4 align="center">A semantic searcher for podcasts transcription<a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
+<h4 align="center">A semantic searcher for podcasts transcription.</h4>
 
 <p align="center">
   <a href="#summary">Summary</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
+  <a href="#credits">Credits</a>
 </p>
 
 ![screenshot](/img/screenshot.png)
@@ -44,6 +44,8 @@ $ docker exec -ti backend-wild-project python init_podcasts.py
 ```
 
 Now you can acces the app through `http://localhost:8080`
+
+To make it available through a public IP you could use a reverse proxy. Be aware that the URL used by the frontend to contact the API and fetch the results should be changed in this case. It is located at `Web/src/services/index.ts`.
 
 ## Credits
 
